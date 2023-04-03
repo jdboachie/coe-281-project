@@ -5,16 +5,22 @@
 int GAME_STATE;
 int CURRENT_CHOICE;
 
+char profile_name[20];
+
 
 int play_step(int GAME_STATE)
 {
+	// Automatically save the game
+	save_game(GAME_STATE);
 	switch (GAME_STATE)
 	{
-		case 0: start();
-		case 1: choice1(GAME_STATE);
-		case 2: choice2(GAME_STATE);
-		case 3: choice3(GAME_STATE);
-		default: type_it("Error: Invalid game state.");
+		case 0: start(); break;
+		case 1: choice1(GAME_STATE); break;
+		case 2: choice2(GAME_STATE); break;
+		case 3: choice3(GAME_STATE); break;
+		default:
+			type_it("Error: Invalid game state.");
+			return -1;
 	}
 	return (GAME_STATE);
 }
@@ -135,10 +141,10 @@ int choice3(int GAME_STATE)
 }
 
 
-int game_loop()
+int game_loop(int GAME_STATE)
 {
-	while (1)
+	while (GAME_STATE != -1)
 	{
-		GAME_STATE = play_step(GAME_STATE);
+		play_step(GAME_STATE);
 	}
 }
