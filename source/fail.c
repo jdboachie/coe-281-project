@@ -1,6 +1,6 @@
 #include "main.h"
 
-void fail()
+void fail(int GAME_STATE)
 {
     char buffer_overflow;
     char choice;
@@ -12,7 +12,7 @@ void fail()
     scanf("%c", &choice);
     if (choice == 'y') {
         scanf("%c", &buffer_overflow);
-        game();
+        play_step(GAME_STATE);
     }
     exit(0);
 }
