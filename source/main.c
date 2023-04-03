@@ -8,6 +8,13 @@ int restore_game()
     FILE *fp;
     int step;
     char filename[50];
+
+    // Get user's profile name
+    char profile_name[50];
+    printf("Enter your profile name: ");
+    scanf("%s", profile_name);
+
+    // Open save file
     sprintf(filename, "%s.dat", profile_name);
     fp = fopen(filename, "r");
     if (fp == NULL)
