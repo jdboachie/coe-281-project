@@ -4,7 +4,6 @@
 
 int GAME_STATE;
 int CURRENT_CHOICE;
-int BUFFER_OVERFLOW;
 
 
 int play_step(int GAME_STATE)
@@ -14,16 +13,8 @@ int play_step(int GAME_STATE)
 		case 0: start();
 		case 1: choice1(GAME_STATE);
 		case 2: choice2(GAME_STATE);
-		// case 3: choice3();
-		// case 4: choice4();
-		// case 5: choice5();
-		// case 6: choice6();
-		// case 7: choice7();
-		// case 8: choice8();
-		// case 9: choice9();
-		// case 10: choice10();
-		default:
-			type_it("Error: Invalid game state.");
+		case 3: choice3(GAME_STATE);
+		default: type_it("Error: Invalid game state.");
 	}
 	return (GAME_STATE);
 }
@@ -38,7 +29,7 @@ int validate_choice(int choice)
 			return 1;
 		}
 	}
-	printf("Invalid choice");
+	printf("Invalid choice. Try again.");
 	play_step(GAME_STATE+1);
 	return 0;
 }
@@ -46,8 +37,9 @@ int validate_choice(int choice)
 
 int start()
 {
+	GAME_STATE = 0;
 	type_it("Detective Jones had been on the trail of the notorious thief, known as the \"Midnight Bandit\", for months.\nThe thief had been targeting jewelry stores in the city, and had so far managed to evade capture.\nHowever, Jones had recently received a tip-off about the thief's next target - a high-end jewelry store on the outskirts of town.\n");
-	choice1(0);
+	play_step(GAME_STATE+1);
 	return 0;
 }
 
@@ -87,10 +79,10 @@ int choice2(int GAME_STATE)
 	type_it("1.\n2.\n3.\n$ ");
 	scanf("%d", &CURRENT_CHOICE);
 	validate_choice(CURRENT_CHOICE);
-	if (CURRENT_CHOICE == 3)
+	if (CURRENT_CHOICE == 2)
 	{
 		type_it("The thief reveals the location of the Midnight Bandit's hideout.\nJones is able to raid the hideout, and arrest several members of the network.\n");
-		GAME_STATE = 2;
+		GAME_STATE = 3;
 		play_step(GAME_STATE);
 	}
 	else
@@ -104,6 +96,38 @@ int choice2(int GAME_STATE)
 		else
 		{
 			type_it("The thief reveals that he was only a small-time crook, and has no knowledge of the Midnight Bandit's network. Jones is forced to release him, and the case remains unsolved.");
+			type_it("\n\tGAME OVER\n\n");
+			fail(GAME_STATE);
+		}
+	}
+}
+
+
+int choice3(int GAME_STATE)
+{
+	type_it("Jones continues to investigate the case, following up on leads and analyzing evidence.\nFinally, he discovers a link between the Midnight Bandit and a wealthy businessman, who had been using the stolen jewelry to fund his own lavish lifestyle.\n");
+	type_it("In a final move, Jones needs to decide whether to confront the businessman, or to present his evidence to the prosecutor.\n");
+	type_it("Do you:\n");
+	type_it("1. Confront the businessman\n2. Present the evidence to the prosecutor\n3. Let it rest.\n$ ");
+	scanf("%d", &CURRENT_CHOICE);
+	validate_choice(CURRENT_CHOICE);
+	if (CURRENT_CHOICE == 2)
+	{
+		type_it("Jones presents the evidence to the prosecutor, who is able to use it to convict the businessman.\nThe businessman is sentenced to prison, and the Midnight Bandit is finally brought to justice.\n");
+		type_it("\n\tYOU WIN!\n\n");
+		exit(0);
+	}
+	else
+	{
+		if (CURRENT_CHOICE == 1)
+		{
+			type_it("Jones confronts the businessman, who is able to bribe his way out of the situation.\nJones is forced to release the businessman, and the case remains unsolved.\n");
+			type_it("\n\tGAME OVER\n\n");
+			fail(GAME_STATE);
+		}
+		else
+		{
+			type_it("Boring, Jones. BORING!");
 			type_it("\n\tGAME OVER\n\n");
 			fail(GAME_STATE);
 		}

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 void type_it(char *str);
-int game_loop();
+int game_loop(step);
 int play_step();
 void fail();
 
