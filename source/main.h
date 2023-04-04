@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+char profile_name[50];
+
 void type_it(char *str);
 int game_loop(int step);
 int save_game();

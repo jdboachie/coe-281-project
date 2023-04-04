@@ -5,8 +5,6 @@
 int GAME_STATE;
 int CURRENT_CHOICE;
 
-char profile_name[20];
-
 
 int play_step(int GAME_STATE)
 {
